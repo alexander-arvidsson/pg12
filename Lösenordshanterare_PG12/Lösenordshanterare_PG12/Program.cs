@@ -6,7 +6,7 @@ namespace Lösenordshanterare_PG12
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World! hejsan svejsan ");
+            Console.WriteLine("Hello World! Hallå");
         }
     }
 }
