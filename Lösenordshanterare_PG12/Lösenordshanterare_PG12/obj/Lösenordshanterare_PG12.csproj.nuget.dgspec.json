@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lisaf\\OneDrive\\Dokument\\GitHub\\pg12\\Lösenordshanterare_PG12\\Lösenordshanterare_PG12\\Lösenordshanterare_PG12.csproj": {}
+    "C:\\Users\\Alex\\source\\repos\\pg12\\Lösenordshanterare_PG12\\Lösenordshanterare_PG12\\Lösenordshanterare_PG12.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lisaf\\OneDrive\\Dokument\\GitHub\\pg12\\Lösenordshanterare_PG12\\Lösenordshanterare_PG12\\Lösenordshanterare_PG12.csproj": {
+    "C:\\Users\\Alex\\source\\repos\\pg12\\Lösenordshanterare_PG12\\Lösenordshanterare_PG12\\Lösenordshanterare_PG12.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lisaf\\OneDrive\\Dokument\\GitHub\\pg12\\Lösenordshanterare_PG12\\Lösenordshanterare_PG12\\Lösenordshanterare_PG12.csproj",
+        "projectUniqueName": "C:\\Users\\Alex\\source\\repos\\pg12\\Lösenordshanterare_PG12\\Lösenordshanterare_PG12\\Lösenordshanterare_PG12.csproj",
         "projectName": "Lösenordshanterare_PG12",
-        "projectPath": "C:\\Users\\lisaf\\OneDrive\\Dokument\\GitHub\\pg12\\Lösenordshanterare_PG12\\Lösenordshanterare_PG12\\Lösenordshanterare_PG12.csproj",
-        "packagesPath": "C:\\Users\\lisaf\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lisaf\\OneDrive\\Dokument\\GitHub\\pg12\\Lösenordshanterare_PG12\\Lösenordshanterare_PG12\\obj\\",
+        "projectPath": "C:\\Users\\Alex\\source\\repos\\pg12\\Lösenordshanterare_PG12\\Lösenordshanterare_PG12\\Lösenordshanterare_PG12.csproj",
+        "packagesPath": "C:\\Users\\Alex\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Alex\\source\\repos\\pg12\\Lösenordshanterare_PG12\\Lösenordshanterare_PG12\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\lisaf\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Alex\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,6 +26,7 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -37,6 +38,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "imports": [
             "net461",
             "net462",
@@ -52,7 +54,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
         }
       }
     }
