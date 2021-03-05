@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Alex\\source\\repos\\pg12\\Lösenordshanterare_PG12\\Lösenordshanterare_PG12\\Lösenordshanterare_PG12.csproj": {}
+    "C:\\Users\\Per Soderberg\\source\\repos\\pg12\\Lösenordshanterare_PG12\\Lösenordshanterare_PG12\\Lösenordshanterare_PG12.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Alex\\source\\repos\\pg12\\Lösenordshanterare_PG12\\Lösenordshanterare_PG12\\Lösenordshanterare_PG12.csproj": {
+    "C:\\Users\\Per Soderberg\\source\\repos\\pg12\\Lösenordshanterare_PG12\\Lösenordshanterare_PG12\\Lösenordshanterare_PG12.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Alex\\source\\repos\\pg12\\Lösenordshanterare_PG12\\Lösenordshanterare_PG12\\Lösenordshanterare_PG12.csproj",
+        "projectUniqueName": "C:\\Users\\Per Soderberg\\source\\repos\\pg12\\Lösenordshanterare_PG12\\Lösenordshanterare_PG12\\Lösenordshanterare_PG12.csproj",
         "projectName": "Lösenordshanterare_PG12",
-        "projectPath": "C:\\Users\\Alex\\source\\repos\\pg12\\Lösenordshanterare_PG12\\Lösenordshanterare_PG12\\Lösenordshanterare_PG12.csproj",
-        "packagesPath": "C:\\Users\\Alex\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Alex\\source\\repos\\pg12\\Lösenordshanterare_PG12\\Lösenordshanterare_PG12\\obj\\",
+        "projectPath": "C:\\Users\\Per Soderberg\\source\\repos\\pg12\\Lösenordshanterare_PG12\\Lösenordshanterare_PG12\\Lösenordshanterare_PG12.csproj",
+        "packagesPath": "C:\\Users\\Per Soderberg\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Per Soderberg\\source\\repos\\pg12\\Lösenordshanterare_PG12\\Lösenordshanterare_PG12\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Alex\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Per Soderberg\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,6 +22,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Users\\Per Soderberg\\Documents\\UiPath\\QuickLibrary": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
