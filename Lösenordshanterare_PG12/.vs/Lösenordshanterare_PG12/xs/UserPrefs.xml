@@ -1,0 +1,14 @@
+﻿<Properties StartupConfiguration="{F0CE23FE-BD1E-42E0-AAB7-2CF513BB40EE}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Lösenordshanterare_PG12/Program.cs">
+    <Files>
+      <File FileName="Lösenordshanterare_PG12/Program.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Lösenordshanterare__PG12 PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
