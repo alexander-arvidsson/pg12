@@ -1,18 +1,13 @@
-﻿using System;
-
-namespace Lösenordshanterare_PG12
+﻿namespace Lösenordshanterare_PG12
 {
     class Program
 
     {
+        static Init init = new Init();
         static void Main(string[] args)
 
         {
-            JsonClient jsonClient = new JsonClient();
-
-            jsonClient.GetUserAndPassword();
-            jsonClient.StoreJsonClient();
-        
+            init.Initialize();
         }
     }
 }
