@@ -22,10 +22,8 @@ namespace Lösenordshanterare_PG12
         {
             serverIV = aes.GenerateIV();
 
-            string unEncryptedVault = JsonSerializer.Serialize(vault);
-            string encryptedVault = aes.EncryptVault(unEncryptedVault, serverIV);
             objects.IV = serverIV;
-            objects.Vault = encryptedVault;
+            objects.Vault = EncryptVault();
 
             File.WriteAllText("server.json", JsonSerializer.Serialize(objects));
 
@@ -33,6 +31,26 @@ namespace Lösenordshanterare_PG12
 
             //for testing purposes
             Console.WriteLine(readAll);
+
+            UnEncryptVault();
+        }
+
+        public String EncryptVault()
+        {
+            string unEncryptedVault = JsonSerializer.Serialize(vault);
+            string encryptedVault = aes.EncryptVault(unEncryptedVault, objects.IV);
+
+            return encryptedVault;
+        }
+
+        public String UnEncryptVault()
+        {
+            string jsonString = File.ReadAllText("server.json");
+            objects = JsonSerializer.Deserialize<ServerObjects>(jsonString);
+            byte[] encryptedVault = Convert.FromBase64String(objects.Vault);
+
+            string unencryptedVault = aes.DecryptVault(encryptedVault, objects.IV);
+            return unencryptedVault;
         }
 
     }

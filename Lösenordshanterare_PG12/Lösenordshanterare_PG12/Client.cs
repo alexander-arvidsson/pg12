@@ -17,7 +17,7 @@ namespace Lösenordshanterare_PG12
         ClientObjects objects = new ClientObjects();
 
         //Will be changed to a promted password when I've figured out where to put it
-        public string masterPassword = "bestInTown1337";
+        public static string masterPassword = "bestInTown1337";
 
         public void CreateClient()
         {
