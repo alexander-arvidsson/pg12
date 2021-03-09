@@ -13,7 +13,7 @@ namespace Lösenordshanterare_PG12
     public class Server
     {
         private string serverIV;
-        private Dictionary<string, object> vault = new Dictionary<string, object>();
+        private Dictionary<string, string> vault = new Dictionary<string, string>();
         private ServerObjects objects = new ServerObjects();
         private AesEncryptor aes = new AesEncryptor();
 
@@ -23,7 +23,7 @@ namespace Lösenordshanterare_PG12
             serverIV = aes.GenerateIV();
 
             objects.IV = serverIV;
-            objects.Vault = EncryptVault();
+            objects.Vault = GetEncryptedVault();
 
             File.WriteAllText("server.json", JsonSerializer.Serialize(objects));
 
@@ -32,10 +32,10 @@ namespace Lösenordshanterare_PG12
             //for testing purposes
             Console.WriteLine(readAll);
 
-            UnEncryptVault();
+            GetUnEncryptedVault();
         }
 
-        public String EncryptVault()
+        public String GetEncryptedVault()
         {
             string unEncryptedVault = JsonSerializer.Serialize(vault);
             string encryptedVault = aes.EncryptVault(unEncryptedVault, objects.IV);
@@ -43,14 +43,29 @@ namespace Lösenordshanterare_PG12
             return encryptedVault;
         }
 
-        public String UnEncryptVault()
+        public Dictionary<string, string> GetUnEncryptedVault()
         {
             string jsonString = File.ReadAllText("server.json");
             objects = JsonSerializer.Deserialize<ServerObjects>(jsonString);
             byte[] encryptedVault = Convert.FromBase64String(objects.Vault);
 
             string unencryptedVault = aes.DecryptVault(encryptedVault, objects.IV);
-            return unencryptedVault;
+
+            vault = JsonSerializer.Deserialize<Dictionary<string, string>>(unencryptedVault);
+
+            //For testing, can be removed 
+            if (vault.Count == 0)
+            {
+                Console.WriteLine("No current content in vault");
+            } else
+            {
+                foreach (KeyValuePair<string, string> valuePair in vault)
+                {
+                    Console.WriteLine("Key = {0}, Value = {1}", valuePair.Key, valuePair.Value);
+                }
+            }
+
+            return vault;
         }
 
     }
