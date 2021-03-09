@@ -8,29 +8,26 @@ namespace Lösenordshanterare_PG12
     public class ServerObjects
     {
         public string IV { get; set; }
-        public Dictionary<string, object> Vault { get; set; }
-
+        public string Vault { get; set; }
     }
-
     public class Server
     {
+        private string serverIV;
+        private Dictionary<string, object> vault = new Dictionary<string, object>();
+        private ServerObjects objects = new ServerObjects();
+        private AesEncryptor aes = new AesEncryptor();
 
         //Might have to split this up into further methods for the retrieval
         public void CreateServer()
         {
-            ServerObjects objects = new ServerObjects();
-            AesEncryptor aes = new AesEncryptor();
+            serverIV = aes.GenerateIV();
 
-             objects.IV = aes.GenerateIV();
+            string unEncryptedVault = JsonSerializer.Serialize(vault);
+            string encryptedVault = aes.EncryptVault(unEncryptedVault, serverIV);
+            objects.IV = serverIV;
+            objects.Vault = encryptedVault;
 
-            //TODO: Find a nicer way to keep the JsonFormatting
-            string unEncryptedVault = JsonSerializer.Serialize(objects.Vault);
-            string IVKey = JsonSerializer.Serialize(objects.IV);
-
-            string encryptedVault = aes.EncryptVault(unEncryptedVault, objects.IV);
-
-            File.WriteAllText("server.json", IVKey);
-            File.AppendAllText("server.json", encryptedVault);
+            File.WriteAllText("server.json", JsonSerializer.Serialize(objects));
 
             string readAll = File.ReadAllText("server.json");
 
