@@ -7,12 +7,10 @@ namespace Lösenordshanterare_PG12.Encryption
     public class KeyDerivation
     {
 
-        private Client client = new Client();
-
-        public byte[] GetVaultKey()
+        public byte[] GetVaultKey(string masterPassword)
         {
             byte[] salt = Convert.FromBase64String(SecretKeyGenerator.secretKey);
-            Rfc2898DeriveBytes k1 = new Rfc2898DeriveBytes(client.masterPassword, salt);
+            Rfc2898DeriveBytes k1 = new Rfc2898DeriveBytes(masterPassword, salt);
 
             return k1.GetBytes(16);
         }
