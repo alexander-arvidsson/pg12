@@ -11,16 +11,17 @@ namespace Lösenordshanterare_PG12
 
     }
 
+    //Needs a retrieval/ deserialization method as well
     public class Client
     {
-        //Starting mPassword not sure if best left blank
-        public string masterPassword = "bestInTown1337";
         ClientObjects objects = new ClientObjects();
-        private SecretKeyGenerator generator = new SecretKeyGenerator();
+
+        //Will be changed to a promted password when I've figured out where to put it
+        public string masterPassword = "bestInTown1337";
 
         public void CreateClient()
         {
-            objects.SecretKey = generator.GenerateSecretKey();
+            objects.SecretKey = SecretKeyGenerator.secretKey;
             string storeJsonString = JsonSerializer.Serialize(objects);
             File.WriteAllText("client.json", storeJsonString);
             Console.WriteLine(storeJsonString);
