@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text.Json;
-using System.Security.Cryptography;
+using System.Collections.Generic;
 
 namespace Lösenordshanterare_PG12
 {
@@ -9,25 +9,30 @@ namespace Lösenordshanterare_PG12
     {
         public string IV { get; set; }
         public string Vault { get; set; }
-
     }
-
     public class Server
     {
+        private string serverIV;
+        private Dictionary<string, object> vault = new Dictionary<string, object>();
+        private ServerObjects objects = new ServerObjects();
+        private AesEncryptor aes = new AesEncryptor();
+
+        //Might have to split this up into further methods for the retrieval
         public void CreateServer()
         {
-            ServerObjects objects = new ServerObjects();
-            AesEncryptor aes = new AesEncryptor();
-            string unencryptedVault = "asdasd";
+            serverIV = aes.GenerateIV();
 
-            objects.IV = aes.GenerateIV();
-            objects.Vault = aes.EncryptVault(unencryptedVault, objects.IV);
+            string unEncryptedVault = JsonSerializer.Serialize(vault);
+            string encryptedVault = aes.EncryptVault(unEncryptedVault, serverIV);
+            objects.IV = serverIV;
+            objects.Vault = encryptedVault;
 
-            string storeJsonString = JsonSerializer.Serialize(objects);
+            File.WriteAllText("server.json", JsonSerializer.Serialize(objects));
 
-            File.WriteAllText("server.json", storeJsonString);
+            string readAll = File.ReadAllText("server.json");
+
             //for testing purposes
-            Console.WriteLine(storeJsonString);
+            Console.WriteLine(readAll);
         }
 
     }
