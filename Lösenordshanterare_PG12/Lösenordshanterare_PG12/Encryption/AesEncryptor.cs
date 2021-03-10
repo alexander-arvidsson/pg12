@@ -3,7 +3,7 @@ using System.Text;
 using System.Security.Cryptography;
 namespace Lösenordshanterare_PG12
 {
-    //This class should be good. Only lacks an decryption method
+    //This class should be good. Only lacks a decryption method
     public class AesEncryptor
     {
         private AesCryptoServiceProvider aesCrypto = new AesCryptoServiceProvider();
@@ -12,7 +12,7 @@ namespace Lösenordshanterare_PG12
         public String EncryptVault(string vault, string IV)
         {
             aesCrypto.IV = Convert.FromBase64String(IV);
-            aesCrypto.Key = derivateKey.GetVaultKey();
+            aesCrypto.Key = derivateKey.GetVaultKey(Client.masterPassword);
 
             ICryptoTransform transform = aesCrypto.CreateEncryptor(aesCrypto.Key, aesCrypto.IV);
 
@@ -22,6 +22,20 @@ namespace Lösenordshanterare_PG12
 
             return encryptedVault;
 
+        }
+
+        public String DecryptVault(byte[] vault, string IV)
+        {
+            aesCrypto.IV = Convert.FromBase64String(IV);
+            aesCrypto.Key = derivateKey.GetVaultKey(Client.masterPassword);
+
+            ICryptoTransform transform = aesCrypto.CreateDecryptor(aesCrypto.Key, aesCrypto.IV);
+
+            byte[] decryptedVault = transform.TransformFinalBlock(vault, 0, vault.Length);
+            string decryptedString = ASCIIEncoding.ASCII.GetString(decryptedVault);
+            Console.WriteLine(decryptedString);
+
+            return decryptedString;
         }
 
         public String GenerateIV()
