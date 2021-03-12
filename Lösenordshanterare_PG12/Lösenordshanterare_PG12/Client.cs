@@ -5,27 +5,38 @@ using System.Text.Json;
 
 namespace Lösenordshanterare_PG12
 {
-    public class ClientObjects
+    public class ClientObject
     {
         public string SecretKey { get; set; }
 
     }
 
-    //Needs a retrieval/ deserialization method as well
     public class Client
     {
-        ClientObjects objects = new ClientObjects();
-
-        //Will be changed to a promted password when I've figured out where to put it
-        public static string masterPassword = "bestInTown1337";
+        public static string masterPassword;
+        ClientObject clientObject = new ClientObject();
 
         public void CreateClient()
         {
-            objects.SecretKey = SecretKeyGenerator.secretKey;
-            string storeJsonString = JsonSerializer.Serialize(objects);
+            clientObject.SecretKey = SecretKeyGenerator.secretKey;
+            string storeJsonString = JsonSerializer.Serialize(clientObject);
             File.WriteAllText("client.json", storeJsonString);
             Console.WriteLine(storeJsonString);
 
+        }
+
+        public String GetDezerializedKey()
+        {
+            string jsonString = File.ReadAllText("client.json");
+            clientObject = JsonSerializer.Deserialize<ClientObject>(jsonString);
+
+            return clientObject.SecretKey;
+        }
+
+        public void CreateMasterPassword()
+        {
+            Console.WriteLine("Create a new master password");
+            masterPassword = Console.ReadLine();
         }
     }
 

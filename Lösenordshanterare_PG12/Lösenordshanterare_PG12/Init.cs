@@ -1,6 +1,7 @@
-﻿namespace Lösenordshanterare_PG12
+﻿using System;
+
+namespace Lösenordshanterare_PG12
 {
-    //Looks Ok, not sure if I really want to place keyGeneration in this class.
     public class Init
     {
         private Client client = new Client();
@@ -9,6 +10,7 @@
 
         public void Initialize()
         {
+            client.CreateMasterPassword();
             generator.GenerateSecretKey();
             client.CreateClient();
             server.CreateServer();
