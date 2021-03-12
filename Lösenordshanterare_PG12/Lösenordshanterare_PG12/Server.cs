@@ -12,18 +12,26 @@ namespace Lösenordshanterare_PG12
     }
     public class Server
     {
-        private string serverIV;
         private Dictionary<string, string> vault = new Dictionary<string, string>();
         private ServerObjects objects = new ServerObjects();
-        private AesEncryptor aes = new AesEncryptor();
+        private readonly AesEncryptor aes = new AesEncryptor();
 
         //Might have to split this up into further methods for the retrieval
         public void CreateServer()
         {
-            serverIV = aes.GenerateIV();
+            string serverIV = aes.GenerateIV();
 
             objects.IV = serverIV;
-            objects.Vault = GetEncryptedVault();
+
+            EncryptVaultAndWriteToServer();
+            GetUnEncryptedVault();
+        }
+
+        public void EncryptVaultAndWriteToServer()
+        {
+            string unEncryptedVault = JsonSerializer.Serialize(vault);
+            string encryptedVault = aes.EncryptVault(unEncryptedVault, objects.IV);
+            objects.Vault = encryptedVault;
 
             File.WriteAllText("server.json", JsonSerializer.Serialize(objects));
 
@@ -31,16 +39,6 @@ namespace Lösenordshanterare_PG12
 
             //for testing purposes
             Console.WriteLine(readAll);
-
-            GetUnEncryptedVault();
-        }
-
-        public String GetEncryptedVault()
-        {
-            string unEncryptedVault = JsonSerializer.Serialize(vault);
-            string encryptedVault = aes.EncryptVault(unEncryptedVault, objects.IV);
-
-            return encryptedVault;
         }
 
         public Dictionary<string, string> GetUnEncryptedVault()
