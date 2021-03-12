@@ -39,7 +39,7 @@ namespace Lösenordshanterare_PG12
                 case "5":
                     break;
                 case "6":
-                    init.Initialize();
+                    //init.Initialize();
                     break;
                 default:
                     Console.WriteLine("Please enter a valid input");

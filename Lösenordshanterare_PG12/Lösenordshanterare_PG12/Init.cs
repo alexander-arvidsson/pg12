@@ -12,6 +12,7 @@
             generator.GenerateSecretKey();
             client.CreateClient();
             server.CreateServer();
+            server.Set("test", "123");
         }
     }
 }
