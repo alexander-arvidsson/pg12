@@ -4,10 +4,11 @@ namespace Lösenordshanterare_PG12
     class Program
 
     {
+        static Set s = new Set();
         static Init init = new Init();
         static void Main(string[] args)
-
         {
+
             init.Initialize();
 
             Console.WriteLine("Welcome, please enter a number of one of the following commands");
@@ -17,34 +18,32 @@ namespace Lösenordshanterare_PG12
             Console.WriteLine("4 Set - Store value for some (possibly new) property in vault.");
             Console.WriteLine("5 Drop - Drop some property from vault.");
             Console.WriteLine("6 Secret - Show secret key.");
-         
-            string command = Console.ReadLine();
 
+            string command = args[0];
 
             switch (command)
             {
-                case "1":
+                case "init":
                     Init a = new Init();
                     init = a; 
                     break;
-                case "2":
+                case "login":
                     Login b = new Login();
                     break;
-                case "3":
+                case "get":
                     // Kommer metoden för att hämta data från vault att skapas i Server klassen? Om inte hur ska jag komma åt den datan? 
                     break;
-                case "4":
-                    //Kommer metod för att ändra data i vault att skapas i Server klassen? Om inte hur tänker att datan ska manipuleras? 
+                case "set":
+                    s.set(args[1]); 
                     break;
-                case "5":
+                case "drop":
                     break;
-                case "6":
+                case "secret":
                     init.Initialize();
                     break;
                 default:
                     Console.WriteLine("Please enter a valid input");
-                    break;
-                        
+                    break;                  
             }
         }
     }
