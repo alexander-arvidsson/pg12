@@ -17,6 +17,7 @@ namespace Lösenordshanterare_PG12
         private readonly AesEncryptor aes = new AesEncryptor();
 
         //Might have to split this up into further methods for the retrieval
+
         public void CreateServer()
         {
             string serverIV = aes.GenerateIV();
