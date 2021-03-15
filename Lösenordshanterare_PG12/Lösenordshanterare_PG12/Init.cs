@@ -14,7 +14,6 @@ namespace Lösenordshanterare_PG12
             generator.GenerateSecretKey();
             client.CreateClient();
             server.CreateServer();
-            server.Set("test", "123");
         }
     }
 }

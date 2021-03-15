@@ -65,10 +65,5 @@ namespace Lösenordshanterare_PG12
 
             return vault;
         }
-
-        public void Set(string prop, string value)
-        {
-            GetUnEncryptedVault().Add(prop, value);
-        }
     }
 }
