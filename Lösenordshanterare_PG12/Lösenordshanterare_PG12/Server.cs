@@ -65,6 +65,5 @@ namespace Lösenordshanterare_PG12
 
             return vault;
         }
-
     }
 }
