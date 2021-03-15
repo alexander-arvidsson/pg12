@@ -10,7 +10,7 @@ namespace Lösenordshanterare_PG12
         {
 
             init.Initialize();
-         
+
             Console.WriteLine("Welcome, please enter a number of one of the following commands");
             Console.WriteLine("1 Init - Create new vault.");
             Console.WriteLine("2 Login - Log in to existing vault.");
@@ -20,7 +20,6 @@ namespace Lösenordshanterare_PG12
             Console.WriteLine("6 Secret - Show secret key.");
 
             string command = args[0];
-            
 
             switch (command)
             {
@@ -35,7 +34,7 @@ namespace Lösenordshanterare_PG12
                     // Kommer metoden för att hämta data från vault att skapas i Server klassen? Om inte hur ska jag komma åt den datan? 
                     break;
                 case "set":
-                    s.set(args); 
+                    s.set(args[1]); 
                     break;
                 case "drop":
                     break;
@@ -44,8 +43,7 @@ namespace Lösenordshanterare_PG12
                     break;
                 default:
                     Console.WriteLine("Please enter a valid input");
-                    break;
-                    
+                    break;                  
             }
         }
     }

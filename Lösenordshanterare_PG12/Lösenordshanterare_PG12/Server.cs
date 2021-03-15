@@ -23,13 +23,13 @@ namespace Lösenordshanterare_PG12
 
             objects.IV = serverIV;
 
-            EncryptVaultAndWriteToServer();
+            EncryptVaultAndWriteToServer(vault);
             GetUnEncryptedVault();
         }
 
-        public void EncryptVaultAndWriteToServer()
+        public void EncryptVaultAndWriteToServer(Dictionary<string, string> updatedVault)
         {
-            string unEncryptedVault = JsonSerializer.Serialize(vault);
+            string unEncryptedVault = JsonSerializer.Serialize(updatedVault);
             string encryptedVault = aes.EncryptVault(unEncryptedVault, objects.IV);
             objects.Vault = encryptedVault;
 
@@ -39,6 +39,21 @@ namespace Lösenordshanterare_PG12
 
             //for testing purposes
             Console.WriteLine(readAll);
+
+            //For testing, can be removed 
+            if (vault.Count == 0)
+            {
+                Console.WriteLine("No current content in vault");
+            }
+            else
+            {
+                foreach (KeyValuePair<string, string> valuePair in vault)
+                {
+                    Console.WriteLine("Key = {0}, Value = {1}", valuePair.Key, valuePair.Value);
+                }
+            }
+
+
         }
 
         public Dictionary<string, string> GetUnEncryptedVault()
@@ -51,17 +66,7 @@ namespace Lösenordshanterare_PG12
 
             vault = JsonSerializer.Deserialize<Dictionary<string, string>>(unencryptedVault);
 
-            //For testing, can be removed 
-            if (vault.Count == 0)
-            {
-                Console.WriteLine("No current content in vault");
-            } else
-            {
-                foreach (KeyValuePair<string, string> valuePair in vault)
-                {
-                    Console.WriteLine("Key = {0}, Value = {1}", valuePair.Key, valuePair.Value);
-                }
-            }
+            
 
             return vault;
         }
