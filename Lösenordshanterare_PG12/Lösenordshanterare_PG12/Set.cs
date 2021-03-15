@@ -12,8 +12,9 @@ namespace Lösenordshanterare_PG12
     {
         Server s = new Server();
         RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
+        Boolean flag = new Boolean();
 
-        public void set(string property, string flag)
+        public void set(string property)
         {
             Console.WriteLine("Enter your master password");
             string mPassword = Console.ReadLine();
@@ -23,7 +24,8 @@ namespace Lösenordshanterare_PG12
             string rngValue = "";
 
             
-            if (mPassword.Equals(Client.masterPassword) && flag == null)
+
+            if (mPassword.Equals(Client.masterPassword) && flag == false)
             {
                 Console.WriteLine("Enter the password you would like to keep");
                 string value =  Console.ReadLine();
@@ -33,7 +35,7 @@ namespace Lösenordshanterare_PG12
                 vault.Add(property, value);
 
                 s.EncryptVaultAndWriteToServer(vault);
-            } else if (mPassword.Equals(Client.masterPassword) && flag == "-g")
+            } else if (mPassword.Equals(Client.masterPassword) && flag == true)
             {
                 while (rngValue.Length != 20)
                 {
@@ -45,10 +47,20 @@ namespace Lösenordshanterare_PG12
                         rngValue += character;
                     }
                 }
-                Console.WriteLine(rngValue);
+                Console.WriteLine("Your new, secure password for " + property + " is: " + rngValue);
             } else
             {
                 Console.WriteLine("Wrong password, command aborted");
+            }
+        }
+        public void IsFlagged(int length)
+        {
+            if(length == 3)
+            {
+                this.flag = true;
+            } else
+            {
+                this.flag = false;
             }
         }
     }
