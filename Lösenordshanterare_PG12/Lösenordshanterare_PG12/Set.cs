@@ -23,13 +23,13 @@ namespace Lösenordshanterare_PG12
                                   "0123456789";
             string rngValue = "";
 
-            
+
 
             if (mPassword.Equals(Client.masterPassword) && flag == false)
             {
-                Console.WriteLine("Enter the password you would like to keep");
-                string value =  Console.ReadLine();
-                
+                Console.WriteLine($"Enter the password you would like for {property}");
+                string value = Console.ReadLine();
+
                 Dictionary<string, string> vault = s.GetUnEncryptedVault();
 
                 vault.Add(property, value);
@@ -47,7 +47,7 @@ namespace Lösenordshanterare_PG12
                         rngValue += character;
                     }
                 }
-                Console.WriteLine("Your new, secure password for " + property + " is: " + rngValue);
+                Console.WriteLine($"Your new, secure password for {property} is: {rngValue}");
             } else
             {
                 Console.WriteLine("Wrong password, command aborted");
