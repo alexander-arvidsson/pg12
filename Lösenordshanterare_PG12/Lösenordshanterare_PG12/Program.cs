@@ -34,7 +34,8 @@ namespace Lösenordshanterare_PG12
                     // Kommer metoden för att hämta data från vault att skapas i Server klassen? Om inte hur ska jag komma åt den datan? 
                     break;
                 case "set":
-                    s.set(args[1], args[2]); 
+                    s.IsFlagged(args.Length);
+                    s.set(args[1]);
                     break;
                 case "drop":
                     break;
