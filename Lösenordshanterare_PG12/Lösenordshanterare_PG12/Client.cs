@@ -25,6 +25,14 @@ namespace Lösenordshanterare_PG12
 
         }
 
+        public void CreateClientLogin()
+        {
+            string storeJsonString = JsonSerializer.Serialize(clientObject);
+            File.WriteAllText("client.json", storeJsonString);
+            Console.WriteLine(storeJsonString);
+
+        }
+
         public String GetDezerializedKey()
         {
             string jsonString = File.ReadAllText("client.json");
