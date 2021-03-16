@@ -13,7 +13,7 @@ namespace Lösenordshanterare_PG12
 
         private Server server = new Server();
 
-        public Drop()
+        public void DropProperty()
         {
             Console.Write("Enter in your master password: ");
             string passwordcheck = Console.ReadLine();
