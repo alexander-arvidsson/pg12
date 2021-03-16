@@ -4,7 +4,6 @@ namespace Lösenordshanterare_PG12
     class Program
 
     {
-        static Set s = new Set();
         static Init init = new Init();
         static void Main(string[] args)
         {
@@ -28,16 +27,20 @@ namespace Lösenordshanterare_PG12
                     init = a; 
                     break;
                 case "login":
-                    Login b = new Login();
+                    Login cmdLogin = new Login();
+                    cmdLogin.masterLogin();
                     break;
                 case "get":
-                    // Kommer metoden för att hämta data från vault att skapas i Server klassen? Om inte hur ska jag komma åt den datan? 
+                    Get cmdGet = new Get();
+                    cmdGet.get(args);
                     break;
                 case "set":
-                    s.IsFlagged(args.Length);
-                    s.set(args[1]);
+                    Set cmdSet = new Set();
+                    cmdSet.set(args);
                     break;
                 case "drop":
+                    Drop cmdDrop = new Drop();
+                    cmdDrop.DropProperty();
                     break;
                 case "secret":
                     init.Initialize();
