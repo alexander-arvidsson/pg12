@@ -1,52 +1,55 @@
 ﻿using System;
+//Ska denna vara här? nedanför:
+using System.Text.Json;
 using System.Collections.Generic;
 
 namespace Lösenordshanterare_PG12
 {
     public class Drop
     {
-        //Lägg in dictionary key-value par
+        
+        //Dubbelkolla att password stämmer
+        //Dubbelkolla att användare är inloggad
 
-        public Drop()
+        private Server server = new Server();
+
+        public void DropProperty()
         {
+            Console.Write("Enter in your master password: ");
+            string passwordcheck = Console.ReadLine();
 
-            Dictionary<string, string> nyckelvärde = new Dictionary<string, string>();
-
-            nyckelvärde.Add("user.gmail.com", "password1");
-            nyckelvärde.Add("user.hotmail.com", "password2");
-            nyckelvärde.Add("user.facebook.com", "password3");
-
-            nyckelvärde["user.gmail.com"] = "lösenord1";
-
-            Console.WriteLine("Välj vilket nyckelvärde-par du vill ta bort");
-            string chosenvalue = Console.ReadLine();
-
-            nyckelvärde.Remove(chosenvalue);
-
-            if (nyckelvärde.ContainsKey(chosenvalue))
+            if (passwordcheck == Client.masterPassword)
             {
-                nyckelvärde.Remove(chosenvalue);
-                Console.WriteLine($"Du tog bort{nyckelvärde[chosenvalue]}");
+                Dictionary<string, string> keyvalue = server.GetUnEncryptedVault();
+
+                /* EXEMPEL: nyckelvärde.Add("user.gmail.com", "password1");
+                nyckelvärde.Add("user.hotmail.com", "password2");
+                nyckelvärde.Add("user.facebook.com", "password3");
+
+                nyckelvärde["user.gmail.com"] = "lösenord1";*/
+
+                Console.WriteLine("Välj vilket nyckelvärde-par du vill ta bort");
+                string chosenvalue = Console.ReadLine();
+
+                if (keyvalue.ContainsKey(chosenvalue))
+                {
+                    keyvalue.Remove(chosenvalue);
+                    Console.WriteLine($"Du tog bort{keyvalue[chosenvalue]}");
+                }
+
+                else
+                {
+                    Console.WriteLine("Detta nyckelvärde-par finns inte i ditt valv.");
+                }
+
+                server.EncryptVaultAndWriteToServer(keyvalue);
+
             }
 
             else
             {
-                Console.WriteLine("Detta nyckelvärde-par finns inte i ditt valv.");
+                Console.WriteLine("Password is incorrect.");
             }
-
-          
-
-            //delete chosenvalue
-
-            /*if (alla emailinformation i valvet != chosenvalue)
-            {
-                Console.WriteLine("Detta värde finns inte i valvet.");
-
-            Eller så gör man en for loop?? Funkar det i dictionary?
-
-            }*/
-
-
         }
     }
 
