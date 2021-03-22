@@ -10,13 +10,7 @@ namespace Lösenordshanterare_PG12
         Server s = new Server();
         public void get(string[] args)
         {
-            Console.WriteLine("Please enter your master password: ");
-            string mPassword = Console.ReadLine();
-            string password = Client.masterPassword;
-
-
-            if (mPassword == password)
-            {
+            
                 Dictionary<string, string> vault = s.GetUnEncryptedVault(args[2], args [1]);
                 try
                 {
@@ -35,10 +29,7 @@ namespace Lösenordshanterare_PG12
                         Console.WriteLine(valuePair.Key);
                     }
                 }
-            } else
-            {
-                Console.WriteLine("Password incorrect, command aborted.");
+
             }
         }
     }
-}

@@ -11,7 +11,6 @@ namespace Lösenordshanterare_PG12
         public void Initialize(string[] args)
         {
             generator.GenerateSecretKey();
-         //   client.CreateMasterPassword();
             client.CreateClient(args[1]);
             server.CreateServer(args[2], args[1]);
         }

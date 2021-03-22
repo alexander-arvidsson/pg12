@@ -28,7 +28,7 @@ namespace Lösenordshanterare_PG12
                     break;
                 case "drop":
                     Drop cmdDrop = new Drop();
-                    cmdDrop.DropProperty(args);
+                    //cmdDrop.DropProperty(args);
                     break;
                 case "secret":
                     break;

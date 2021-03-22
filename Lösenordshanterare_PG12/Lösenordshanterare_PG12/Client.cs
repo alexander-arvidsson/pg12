@@ -13,12 +13,12 @@ namespace Lösenordshanterare_PG12
 
     public class Client
     {
-        public static string masterPassword;
-        ClientObject clientObject = new ClientObject();
+        private ClientObject clientObject = new ClientObject();
+        private SecretKeyGenerator keyGenerator = new SecretKeyGenerator();
 
         public void CreateClient(string clientPath)
         {
-            clientObject.SecretKey = SecretKeyGenerator.secretKey;
+            clientObject.SecretKey = keyGenerator.GenerateSecretKey();
             string storeJsonString = JsonSerializer.Serialize(clientObject);
             File.WriteAllText(clientPath, storeJsonString);
             Console.WriteLine(storeJsonString);
@@ -38,12 +38,6 @@ namespace Lösenordshanterare_PG12
             clientObject = JsonSerializer.Deserialize<ClientObject>(jsonString);
 
             return clientObject.SecretKey;
-        }
-
-        public void CreateMasterPassword()
-        {
-            Console.WriteLine("Create a new master password");
-            masterPassword = Console.ReadLine();
         }
     }
 
