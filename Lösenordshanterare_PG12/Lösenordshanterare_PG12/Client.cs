@@ -16,26 +16,25 @@ namespace Lösenordshanterare_PG12
         public static string masterPassword;
         ClientObject clientObject = new ClientObject();
 
-        public void CreateClient()
+        public void CreateClient(string clientPath)
         {
             clientObject.SecretKey = SecretKeyGenerator.secretKey;
             string storeJsonString = JsonSerializer.Serialize(clientObject);
-            File.WriteAllText("client.json", storeJsonString);
+            File.WriteAllText(clientPath, storeJsonString);
             Console.WriteLine(storeJsonString);
 
         }
 
-        public void CreateClientLogin()
+        public void CreateLoginClient(string clientPath)
         {
-            string storeJsonString = JsonSerializer.Serialize(clientObject);
-            File.WriteAllText("client.json", storeJsonString);
-            Console.WriteLine(storeJsonString);
-
+            string getJsonOrigin = File.ReadAllText(clientPath);
+            string storeJsonString = JsonSerializer.Serialize(getJsonOrigin);
+            File.WriteAllText(clientPath, storeJsonString);
         }
 
-        public String GetDezerializedKey()
+        public String GetDezerializedKey(string clientPath)
         {
-            string jsonString = File.ReadAllText("client.json");
+            string jsonString = File.ReadAllText(clientPath);
             clientObject = JsonSerializer.Deserialize<ClientObject>(jsonString);
 
             return clientObject.SecretKey;

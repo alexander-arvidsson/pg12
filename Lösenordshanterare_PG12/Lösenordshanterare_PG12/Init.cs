@@ -8,12 +8,12 @@ namespace Lösenordshanterare_PG12
         private SecretKeyGenerator generator = new SecretKeyGenerator();
         private Server server = new Server();
 
-        public void Initialize()
+        public void Initialize(string[] args)
         {
-            client.CreateMasterPassword();
             generator.GenerateSecretKey();
-            client.CreateClient();
-            server.CreateServer();
+         //   client.CreateMasterPassword();
+            client.CreateClient(args[1]);
+            server.CreateServer(args[2], args[1]);
         }
     }
 }

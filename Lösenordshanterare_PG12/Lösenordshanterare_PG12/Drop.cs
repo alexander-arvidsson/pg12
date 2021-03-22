@@ -13,14 +13,14 @@ namespace Lösenordshanterare_PG12
 
         private Server server = new Server();
 
-        public void DropProperty()
+        public void DropProperty(string[] args)
         {
             Console.Write("Enter in your master password: ");
             string passwordcheck = Console.ReadLine();
 
             if (passwordcheck == Client.masterPassword)
             {
-                Dictionary<string, string> keyvalue = server.GetUnEncryptedVault();
+                Dictionary<string, string> keyvalue = server.GetUnEncryptedVault(args[2], args[1]);
 
                 /* EXEMPEL: nyckelvärde.Add("user.gmail.com", "password1");
                 nyckelvärde.Add("user.hotmail.com", "password2");
@@ -42,7 +42,7 @@ namespace Lösenordshanterare_PG12
                     Console.WriteLine("Detta nyckelvärde-par finns inte i ditt valv.");
                 }
 
-                server.EncryptVaultAndWriteToServer(keyvalue);
+                server.EncryptVaultAndWriteToServer(args[2], keyvalue, args[1]);
 
             }
 
