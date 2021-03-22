@@ -17,25 +17,24 @@ namespace Lösenordshanterare_PG12
         private readonly AesEncryptor aes = new AesEncryptor();
 
         //Might have to split this up into further methods for the retrieval
-        public void CreateServer()
+        public void CreateServer(string serverPath, string clientPath)
         {
             string serverIV = aes.GenerateIV();
 
             objects.IV = serverIV;
 
-            EncryptVaultAndWriteToServer(vault);
-            GetUnEncryptedVault();
+            EncryptVaultAndWriteToServer(serverPath, vault, clientPath);
         }
 
-        public void EncryptVaultAndWriteToServer(Dictionary<string, string> updatedVault)
+        public void EncryptVaultAndWriteToServer(string serverPath, Dictionary<string, string> updatedVault, string clientPath)
         {
             string unEncryptedVault = JsonSerializer.Serialize(updatedVault);
-            string encryptedVault = aes.EncryptVault(unEncryptedVault, objects.IV);
+            string encryptedVault = aes.EncryptVault(unEncryptedVault, objects.IV, clientPath);
             objects.Vault = encryptedVault;
 
-            File.WriteAllText("server.json", JsonSerializer.Serialize(objects));
+            File.WriteAllText(serverPath, JsonSerializer.Serialize(objects));
 
-            string readAll = File.ReadAllText("server.json");
+            string readAll = File.ReadAllText(serverPath);
 
             //for testing purposes
             Console.WriteLine(readAll);
@@ -56,17 +55,32 @@ namespace Lösenordshanterare_PG12
 
         }
 
-        public Dictionary<string, string> GetUnEncryptedVault()
+        public Dictionary<string, string> GetUnEncryptedVault(string serverPath, string clientPath)
         {
-            string jsonString = File.ReadAllText("server.json");
+            string jsonString = File.ReadAllText(serverPath);
             objects = JsonSerializer.Deserialize<ServerObjects>(jsonString);
             byte[] encryptedVault = Convert.FromBase64String(objects.Vault);
 
-            string unencryptedVault = aes.DecryptVault(encryptedVault, objects.IV);
+            string unencryptedVault = aes.DecryptVault(encryptedVault, objects.IV, clientPath);
 
             vault = JsonSerializer.Deserialize<Dictionary<string, string>>(unencryptedVault);
 
             
+
+            return vault;
+        }
+
+        public Dictionary<string, string> GetUnEncryptedVault(string serverPath, string clientPath, string secretKey)
+        {
+            string jsonString = File.ReadAllText(serverPath);
+            objects = JsonSerializer.Deserialize<ServerObjects>(jsonString);
+            byte[] encryptedVault = Convert.FromBase64String(objects.Vault);
+
+            string unencryptedVault = aes.DecryptVault(encryptedVault, objects.IV, clientPath, secretKey);
+
+            vault = JsonSerializer.Deserialize<Dictionary<string, string>>(unencryptedVault);
+
+
 
             return vault;
         }

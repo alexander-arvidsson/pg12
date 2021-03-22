@@ -12,21 +12,17 @@ namespace Lösenordshanterare_PG12
     {
         Server s = new Server();
         RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
-        Boolean flag = new Boolean();
 
         public void set(string[] args)
         {
-            Console.WriteLine("Enter your master password");
-            string mPassword = Console.ReadLine();
             string alphaNumeric = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
                                   "abcdefghijklmnopqrstuvwxyz" +
                                   "0123456789";
             string rngValue = "";
 
 
-
             try {
-                if (mPassword.Equals(Client.masterPassword) && args[2] != null)
+                if (args[4] != null)
                 {
                         while (rngValue.Length != 20)
                         {
@@ -38,21 +34,30 @@ namespace Lösenordshanterare_PG12
                                 rngValue += character;
                             }
                         }
-                        Console.WriteLine($"Your new, secure password for {args[1]} is: {rngValue}");
-                } else
-                {
-                    Console.WriteLine("Wrong password, command aborted");
+
+                    Dictionary<string, string> vault = s.GetUnEncryptedVault(args[2], args[1]);
+                    if (vault.ContainsKey(args[3]))
+                    {
+                        vault.Remove(args[3]);
+                    }
+                    vault.Add(args[3], rngValue);
+                    s.EncryptVaultAndWriteToServer(args[2], vault, args[1]);
+
+                    Console.WriteLine($"Your new, secure password for {args[3]} is: {rngValue}");
                 }
+
             } catch (IndexOutOfRangeException)
             {
-                Console.WriteLine($"Enter the password you would like for {args[1]}");
+                Console.WriteLine($"Enter the password you would like for {args[3]}");
                 string value = Console.ReadLine();
 
-                Dictionary<string, string> vault = s.GetUnEncryptedVault();
-
-                vault.Add(args[1], value);
-
-                s.EncryptVaultAndWriteToServer(vault);
+                Dictionary<string, string> vault = s.GetUnEncryptedVault(args[2], args[1]);
+                if (vault.ContainsKey(args[3]))
+                {
+                    vault.Remove(args[3]);
+                }
+                vault.Add(args[3], value);
+                s.EncryptVaultAndWriteToServer(args[2], vault, args[1]);
             }
         }
     }

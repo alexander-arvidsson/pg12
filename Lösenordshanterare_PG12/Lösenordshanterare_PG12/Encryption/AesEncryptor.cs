@@ -8,11 +8,14 @@ namespace Lösenordshanterare_PG12
     {
         private AesCryptoServiceProvider aesCrypto = new AesCryptoServiceProvider();
         private Encryption.KeyDerivation derivateKey = new Encryption.KeyDerivation();
+        string masterPassword;
 
-        public String EncryptVault(string vault, string IV)
+        public String EncryptVault(string vault, string IV, string clientPath)
         {
+            Console.WriteLine("Enter your master password");
+            masterPassword = Console.ReadLine();
             aesCrypto.IV = Convert.FromBase64String(IV);
-            aesCrypto.Key = derivateKey.GetVaultKey(Client.masterPassword);
+            aesCrypto.Key = derivateKey.GetVaultKey(masterPassword, clientPath);
 
             ICryptoTransform transform = aesCrypto.CreateEncryptor(aesCrypto.Key, aesCrypto.IV);
 
@@ -24,10 +27,12 @@ namespace Lösenordshanterare_PG12
 
         }
 
-        public String DecryptVault(byte[] vault, string IV)
+        public String DecryptVault(byte[] vault, string IV, string clientPath)
         {
+            Console.WriteLine("Enter your master password");
+            masterPassword = Console.ReadLine();
             aesCrypto.IV = Convert.FromBase64String(IV);
-            aesCrypto.Key = derivateKey.GetVaultKey(Client.masterPassword);
+            aesCrypto.Key = derivateKey.GetVaultKey(masterPassword, clientPath);
 
             ICryptoTransform transform = aesCrypto.CreateDecryptor(aesCrypto.Key, aesCrypto.IV);
 
@@ -37,6 +42,23 @@ namespace Lösenordshanterare_PG12
 
             return decryptedString;
         }
+
+        public String DecryptVault(byte[] vault, string IV, string clientPath, string secretKey)
+        {
+            Console.WriteLine("Enter your master password");
+            masterPassword = Console.ReadLine();
+            aesCrypto.IV = Convert.FromBase64String(IV);
+            aesCrypto.Key = derivateKey.GetVaultKey(masterPassword, clientPath, secretKey);
+
+            ICryptoTransform transform = aesCrypto.CreateDecryptor(aesCrypto.Key, aesCrypto.IV);
+
+            byte[] decryptedVault = transform.TransformFinalBlock(vault, 0, vault.Length);
+            string decryptedString = ASCIIEncoding.ASCII.GetString(decryptedVault);
+            Console.WriteLine(decryptedString);
+
+            return decryptedString;
+        }
+
 
         public String GenerateIV()
         {
