@@ -41,7 +41,7 @@ namespace Lösenordshanterare_PG12
                         vault.Remove(args[3]);
                     }
                     vault.Add(args[3], rngValue);
-                    s.EncryptVaultAndWriteToServer(args[1], vault, args[2]);
+                    s.EncryptVaultAndWriteToServer(args[2], vault, args[1]);
 
                     Console.WriteLine($"Your new, secure password for {args[3]} is: {rngValue}");
                 }
