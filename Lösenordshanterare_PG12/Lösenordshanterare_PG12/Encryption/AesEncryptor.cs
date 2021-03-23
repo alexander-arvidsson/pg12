@@ -3,7 +3,6 @@ using System.Text;
 using System.Security.Cryptography;
 namespace Lösenordshanterare_PG12
 {
-    //This class should be good. Only lacks a decryption method
     public class AesEncryptor
     {
         private AesCryptoServiceProvider aesCrypto = new AesCryptoServiceProvider();
@@ -12,8 +11,12 @@ namespace Lösenordshanterare_PG12
 
         public String EncryptVault(string vault, string IV, string clientPath)
         {
-            Console.WriteLine("Enter your master password");
-            masterPassword = Console.ReadLine();
+            if (String.IsNullOrEmpty(masterPassword)) 
+            {
+                Console.WriteLine("Enter your master password");
+                masterPassword = Console.ReadLine();
+            }
+
             aesCrypto.IV = Convert.FromBase64String(IV);
             aesCrypto.Key = derivateKey.GetVaultKey(masterPassword, clientPath);
 
@@ -27,22 +30,6 @@ namespace Lösenordshanterare_PG12
 
         }
 
-        public String DecryptVault(byte[] vault, string IV, string clientPath)
-        {
-            Console.WriteLine("Enter your master password");
-            masterPassword = Console.ReadLine();
-            aesCrypto.IV = Convert.FromBase64String(IV);
-            aesCrypto.Key = derivateKey.GetVaultKey(masterPassword, clientPath);
-
-            ICryptoTransform transform = aesCrypto.CreateDecryptor(aesCrypto.Key, aesCrypto.IV);
-
-            byte[] decryptedVault = transform.TransformFinalBlock(vault, 0, vault.Length);
-            string decryptedString = ASCIIEncoding.ASCII.GetString(decryptedVault);
-            Console.WriteLine(decryptedString);
-
-            return decryptedString;
-        }
-
         public String DecryptVault(byte[] vault, string IV, string clientPath, string secretKey)
         {
             Console.WriteLine("Enter your master password");
@@ -54,11 +41,9 @@ namespace Lösenordshanterare_PG12
 
             byte[] decryptedVault = transform.TransformFinalBlock(vault, 0, vault.Length);
             string decryptedString = ASCIIEncoding.ASCII.GetString(decryptedVault);
-            Console.WriteLine(decryptedString);
 
             return decryptedString;
         }
-
 
         public String GenerateIV()
         {

@@ -10,13 +10,17 @@ namespace Lösenordshanterare_PG12
 
             switch (command)
             {
+                case "menu":
+                    Menu m = new Menu();
+                    m.GetMenu();
+                    break;
                 case "init":
                     Init a = new Init();
                     a.Initialize(args);
                     break;
                 case "login":
                     Login cmdLogin = new Login();
-                    cmdLogin.newLogin(args);
+                    cmdLogin.login(args);
                     break;
                 case "get":
                     Get cmdGet = new Get();
@@ -31,6 +35,8 @@ namespace Lösenordshanterare_PG12
                     cmdDrop.DropProperty(args);
                     break;
                 case "secret":
+                    Secret cmdSecret = new Secret();
+                    cmdSecret.GetSecret(args);
                     break;
                 default:
                     Console.WriteLine("Please enter a valid input");

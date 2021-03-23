@@ -4,41 +4,29 @@ using System.Text;
 
 namespace Lösenordshanterare_PG12
 {
-    class Get
+    public class Get
     {
-        Client c = new Client();
-        Server s = new Server();
+        private Server s = new Server();
         public void get(string[] args)
         {
-            Console.WriteLine("Please enter your master password: ");
-            string mPassword = Console.ReadLine();
-            string password = Client.masterPassword;
-
-
-            if (mPassword == password)
+            string value;
+            Dictionary<string, string> vault = s.GetUnEncryptedVault(args[2], args[1]);
+            try
             {
-                Dictionary<string, string> vault = s.GetUnEncryptedVault(args[2], args [1]);
-                try
+                if (vault.TryGetValue(args[3], out value))
                 {
-
-                foreach(KeyValuePair<string, string> valuePair in vault)
-                {
-                    if (vault.ContainsKey(args[3]))
-                    {
-                        Console.WriteLine($"The password for {args[3]} is: {valuePair.Value}");
-                    }
+                    Console.WriteLine($"The password for {args[3]} is: {value}");
                 }
-                } catch (IndexOutOfRangeException)
-                {
-                    foreach (KeyValuePair<string, string> valuePair in vault)
-                    {
-                        Console.WriteLine(valuePair.Key);
-                    }
-                }
-            } else
-            {
-                Console.WriteLine("Password incorrect, command aborted.");
             }
+            catch (IndexOutOfRangeException)
+            {
+                Console.WriteLine("Current keys in vault:");
+                foreach (KeyValuePair<string, string> valuePair in vault)
+                {
+                    Console.WriteLine(valuePair.Key);
+                }
+            }
+
         }
     }
 }
