@@ -45,7 +45,6 @@ namespace Lösenordshanterare_PG12
 
                     Console.WriteLine($"Your new, secure password for {args[3]} is: {rngValue}");
                 }
-
             } catch (IndexOutOfRangeException)
             {
                 Console.WriteLine($"Enter the password you would like for {args[3]}");
@@ -58,6 +57,7 @@ namespace Lösenordshanterare_PG12
                 }
                 vault.Add(args[3], value);
                 s.EncryptVaultAndWriteToServer(args[2], vault, args[1]);
+                Console.WriteLine($"{value} has been registered as password for {args[3]}");
             }
         }
     }
