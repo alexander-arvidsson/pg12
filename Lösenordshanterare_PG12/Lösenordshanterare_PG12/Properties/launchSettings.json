@@ -2,7 +2,7 @@
   "profiles": {
     "Lösenordshanterare_PG12": {
       "commandName": "Project",
-      "commandLineArgs": "\"set\" \"client.json\" \"server.json\""
+      "commandLineArgs": "\"get\" \"client1.json\" \"server.json\""
     }
   }
 }

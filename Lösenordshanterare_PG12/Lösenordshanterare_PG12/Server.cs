@@ -16,7 +16,6 @@ namespace Lösenordshanterare_PG12
         private ServerObjects objects = new ServerObjects();
         private readonly AesEncryptor aes = new AesEncryptor();
 
-        //Might have to split this up into further methods for the retrieval
         public void CreateServer(string serverPath, string clientPath)
         {
             string serverIV = aes.GenerateIV();
@@ -42,14 +41,7 @@ namespace Lösenordshanterare_PG12
             objects = JsonSerializer.Deserialize<ServerObjects>(jsonString);
             byte[] encryptedVault = Convert.FromBase64String(objects.Vault);
 
-            string unencryptedVault;
-            if (String.IsNullOrEmpty(secretKey)) 
-            {
-                unencryptedVault = aes.DecryptVault(encryptedVault, objects.IV, clientPath);
-            } else
-            {
-                unencryptedVault = aes.DecryptVault(encryptedVault, objects.IV, secretKey);
-            }
+            string unencryptedVault = aes.DecryptVault(encryptedVault, objects.IV, clientPath, secretKey);
 
             vault = JsonSerializer.Deserialize<Dictionary<string, string>>(unencryptedVault);    
 
