@@ -30,9 +30,9 @@ namespace PasswordManagerTest
         [TestInitialize]
         public void Setup()
         {
-            this.serverPath = Path.Join("__tmp", "server.json");
-            this.clientPath1 = Path.Join("___tmp1", "client1.json");
-            this.clientPath2 = Path.Join("__tmp2", "client2.json");
+            this.serverPath = "server.json";
+            this.clientPath1 = "client1.json";
+            this.clientPath2 = "client2.json";
             resetConsoleOutput();
         }
 
