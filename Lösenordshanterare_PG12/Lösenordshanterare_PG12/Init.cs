@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace Lösenordshanterare_PG12
 {
     public class Init

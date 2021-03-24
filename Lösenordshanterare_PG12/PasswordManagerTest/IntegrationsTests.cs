@@ -1,7 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
-using System.Text;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using Lösenordshanterare_PG12;
@@ -30,9 +29,9 @@ namespace PasswordManagerTest
         [TestInitialize]
         public void Setup()
         {
-            this.serverPath = Path.Join("__tmp", "server.json");
-            this.clientPath1 = Path.Join("___tmp1", "client1.json");
-            this.clientPath2 = Path.Join("__tmp2", "client2.json");
+            this.serverPath = ("server.json");
+            this.clientPath1 = ("client1.json");
+            this.clientPath2 = ("client2.json");
             resetConsoleOutput();
         }
 
@@ -198,7 +197,7 @@ namespace PasswordManagerTest
         private string login(string clientPath, string serverPath, string pwd, string secret)
         {
             resetConsoleOutput();
-            setConsoleInput(pwd, secret);
+            setConsoleInput(secret, pwd);
             run("login", clientPath, serverPath);
             return getConsoleOutput().Trim();
         }
@@ -214,7 +213,7 @@ namespace PasswordManagerTest
         private string set(string clientPath, string serverPath, string pwd, string prop, string val)
         {
             resetConsoleOutput();
-            setConsoleInput(pwd, val);
+            setConsoleInput(val, pwd);
             run("set", clientPath, serverPath, prop);
             return getConsoleOutput().Trim();
         }
