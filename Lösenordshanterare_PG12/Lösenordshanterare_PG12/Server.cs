@@ -14,7 +14,7 @@ namespace Lösenordshanterare_PG12
     {
         private Dictionary<string, string> vault = new Dictionary<string, string>();
         private ServerObjects objects = new ServerObjects();
-        private readonly AesEncryptor aes = new AesEncryptor();
+        private AesEncryptor aes = new AesEncryptor();
 
         public void CreateServer(string serverPath, string clientPath)
         {
@@ -43,7 +43,7 @@ namespace Lösenordshanterare_PG12
 
             string unencryptedVault = aes.DecryptVault(encryptedVault, objects.IV, clientPath, secretKey);
 
-            vault = JsonSerializer.Deserialize<Dictionary<string, string>>(unencryptedVault);    
+            vault = JsonSerializer.Deserialize<Dictionary<string, string>>(unencryptedVault);
 
             return vault;
         }

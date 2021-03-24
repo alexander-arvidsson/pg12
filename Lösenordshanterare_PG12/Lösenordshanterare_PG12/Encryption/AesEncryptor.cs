@@ -7,11 +7,11 @@ namespace Lösenordshanterare_PG12
     {
         private AesCryptoServiceProvider aesCrypto = new AesCryptoServiceProvider();
         private Encryption.KeyDerivation derivateKey = new Encryption.KeyDerivation();
-        string masterPassword;
+        private string masterPassword;
 
         public String EncryptVault(string vault, string IV, string clientPath)
         {
-            if (String.IsNullOrEmpty(masterPassword)) 
+            if (String.IsNullOrEmpty(masterPassword))
             {
                 Console.WriteLine("Enter your master password");
                 masterPassword = Console.ReadLine();
@@ -38,18 +38,13 @@ namespace Lösenordshanterare_PG12
             aesCrypto.Key = derivateKey.GetVaultKey(masterPassword, clientPath, secretKey);
 
             ICryptoTransform transform = aesCrypto.CreateDecryptor(aesCrypto.Key, aesCrypto.IV);
-            
-            try
-            {
+
             byte[] decryptedVault = transform.TransformFinalBlock(vault, 0, vault.Length);
+
             string decryptedString = ASCIIEncoding.ASCII.GetString(decryptedVault);
+
             return decryptedString;
-            } catch (CryptographicException)
-            {
-                Console.WriteLine("Incorrect master password.");
-                Environment.Exit(6);    
-            }
-            return " ";
+
         }
 
         public String GenerateIV()

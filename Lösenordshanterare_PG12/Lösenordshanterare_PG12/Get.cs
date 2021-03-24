@@ -16,20 +16,27 @@ namespace Lösenordshanterare_PG12
                 if (vault.TryGetValue(args[3], out value))
                 {
                     Console.WriteLine($"The password for {args[3]} is: {value}");
-                } else
+                }
+                else
                 {
-                    Console.WriteLine($"No password exists for {args[3]}");
+                    Console.WriteLine($"property {args[3]} doesn't exist in vault");
                 }
             }
             catch (IndexOutOfRangeException)
             {
-                Console.WriteLine("Current keys in vault:");
-                foreach (KeyValuePair<string, string> valuePair in vault)
+                if (vault.Count == 0)
                 {
-                    Console.WriteLine(valuePair.Key);
+                    Console.WriteLine("No properties exists in vault");
+                }
+                else
+                {
+                    Console.WriteLine("Current properties in vault:");
+                    foreach (KeyValuePair<string, string> valuePair in vault)
+                    {
+                        Console.WriteLine(valuePair.Key);
+                    }
                 }
             }
-
         }
     }
 }

@@ -3,7 +3,6 @@ using System.Security.Cryptography;
 
 namespace Lösenordshanterare_PG12
 {
-    //Generates our secret key
     public class SecretKeyGenerator
     {
 

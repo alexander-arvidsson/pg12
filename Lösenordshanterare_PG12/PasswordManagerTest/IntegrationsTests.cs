@@ -29,9 +29,9 @@ namespace PasswordManagerTest
         [TestInitialize]
         public void Setup()
         {
-            this.serverPath = ("server.json");
-            this.clientPath1 = ("client1.json");
-            this.clientPath2 = ("client2.json");
+            this.serverPath = "server.json";
+            this.clientPath1 = "client1.json";
+            this.clientPath2 = "client2.json";
             resetConsoleOutput();
         }
 

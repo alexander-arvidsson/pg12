@@ -19,12 +19,12 @@ namespace Lösenordshanterare_PG12
         public void CreateClient(string clientPath, string secretKey = "")
         {
             if (String.IsNullOrEmpty(secretKey))
-            { 
-                clientObject.SecretKey = keyGenerator.GenerateSecretKey(); 
+            {
+                clientObject.SecretKey = keyGenerator.GenerateSecretKey();
             }
-            else 
-            { 
-                clientObject.SecretKey = secretKey; 
+            else
+            {
+                clientObject.SecretKey = secretKey;
             }
             string storeJsonString = JsonSerializer.Serialize(clientObject);
             File.WriteAllText(clientPath, storeJsonString);
