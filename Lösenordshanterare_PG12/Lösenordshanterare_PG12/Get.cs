@@ -16,6 +16,9 @@ namespace Lösenordshanterare_PG12
                 if (vault.TryGetValue(args[3], out value))
                 {
                     Console.WriteLine($"The password for {args[3]} is: {value}");
+                } else
+                {
+                    Console.WriteLine($"No password exists for {args[3]}");
                 }
             }
             catch (IndexOutOfRangeException)
