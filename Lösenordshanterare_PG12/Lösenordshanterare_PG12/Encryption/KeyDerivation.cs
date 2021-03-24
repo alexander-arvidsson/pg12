@@ -3,10 +3,9 @@ using System.Security.Cryptography;
 
 namespace Lösenordshanterare_PG12.Encryption
 {
-    //Seems to work... Surprisingly simple, hopefully stays working in decryption stage
     public class KeyDerivation
     {
-    Client c = new Client();
+        private Client c = new Client();
 
         public byte[] GetVaultKey(string masterPassword, string clientPath, string secretKey = "")
         {
@@ -16,8 +15,9 @@ namespace Lösenordshanterare_PG12.Encryption
             if (String.IsNullOrEmpty(secretKey))
             {
                 salt = Convert.FromBase64String(c.GetDezerializedKey(clientPath));
-                
-            } else
+
+            }
+            else
             {
                 salt = Convert.FromBase64String(secretKey);
             }

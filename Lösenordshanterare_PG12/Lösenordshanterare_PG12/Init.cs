@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 
 namespace Lösenordshanterare_PG12
 {
@@ -11,6 +12,7 @@ namespace Lösenordshanterare_PG12
         {
             client.CreateClient(args[1]);
             server.CreateServer(args[2], args[1]);
+            Console.WriteLine($"Creating a new client at: {args[1]} and server at {args[2]}");
         }
     }
 }

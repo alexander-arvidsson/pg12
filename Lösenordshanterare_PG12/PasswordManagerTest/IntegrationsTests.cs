@@ -1,7 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
-using System.Text;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using Lösenordshanterare_PG12;
@@ -198,7 +197,7 @@ namespace PasswordManagerTest
         private string login(string clientPath, string serverPath, string pwd, string secret)
         {
             resetConsoleOutput();
-            setConsoleInput(pwd, secret);
+            setConsoleInput(secret, pwd);
             run("login", clientPath, serverPath);
             return getConsoleOutput().Trim();
         }
@@ -214,7 +213,7 @@ namespace PasswordManagerTest
         private string set(string clientPath, string serverPath, string pwd, string prop, string val)
         {
             resetConsoleOutput();
-            setConsoleInput(pwd, val);
+            setConsoleInput(val, pwd);
             run("set", clientPath, serverPath, prop);
             return getConsoleOutput().Trim();
         }

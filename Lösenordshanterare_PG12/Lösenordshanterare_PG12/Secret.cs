@@ -8,7 +8,7 @@ namespace Lösenordshanterare_PG12
         public void GetSecret(string[] args)
         {
             string secretKey = client.GetDezerializedKey(args[1]);
-            Console.WriteLine("Printing secret key in string format:\n" + secretKey);
+            Console.WriteLine(secretKey);
         }
     }
 }
